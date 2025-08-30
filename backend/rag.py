@@ -1,14 +1,17 @@
 import os
 from typing import Dict, List, Any
-from openai import OpenAI
+from groq import Groq
+from dotenv import load_dotenv
 
 
 class ReportGenerator:
     def __init__(self):
-        self.api_key = os.getenv("OPENAI_API_KEY")
-        if not self.api_key:
-            raise ValueError("Chave API do OpenAI não fornecida.")
-        self.client = OpenAI(api_key=self.api_key)
+        load_dotenv()
+
+        #self.api_key = os.getenv("OPENAI_API_KEY")
+        #if not self.api_key:
+        #    raise ValueError("Chave API do OpenAI não fornecida.")
+        self.client = Groq()
 
     def generate_report(
         self, account_data: Dict[str, Any], transactions: List[Dict[str, Any]]
@@ -36,7 +39,7 @@ class ReportGenerator:
 
         try:
             response = self.client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="llama-3.1-8b-instant",
                 messages=[
                     {
                         "role": "system",

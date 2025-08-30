@@ -1,7 +1,7 @@
 from typing import Dict, List, Any
 from stellar_sdk import Server
 
-HORIZON_URL = "https://horizon.stellar.org"
+HORIZON_URL = "https://horizon-testnet.stellar.org"
 
 
 class StellarDataRetriever:

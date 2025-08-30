@@ -10,7 +10,7 @@ rag_system = RAGSystem()
 stellar = StellarDataRetriever()
 
 
-@app.post("/generate-report")
+@app.get("/generate-report")
 def generate_stellar_report(account_id: str):
     """Gera um relatório RAG para uma conta Stellar."""
     try:
@@ -23,3 +23,4 @@ def generate_stellar_report(account_id: str):
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+
