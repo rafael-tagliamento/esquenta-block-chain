@@ -1,16 +1,10 @@
 import os
 from typing import Dict, List, Any
 from groq import Groq
-from dotenv import load_dotenv
 
 
 class ReportGenerator:
     def __init__(self):
-        load_dotenv()
-
-        #self.api_key = os.getenv("OPENAI_API_KEY")
-        #if not self.api_key:
-        #    raise ValueError("Chave API do OpenAI não fornecida.")
         self.client = Groq()
 
     def generate_report(

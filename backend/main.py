@@ -5,7 +5,6 @@ from stellar_connector import StellarDataRetriever
 
 app = FastAPI()
 
-# Inicializar o sistema RAG (configure a chave API do OpenAI)
 rag_system = RAGSystem()
 stellar = StellarDataRetriever()
 
@@ -18,9 +17,12 @@ def generate_stellar_report(account_id: str):
         transactions = stellar.get_recent_transactions(account_id, 10)
 
         report = rag_system.generate_account_report(account_data, transactions)
-        return {"account_id": account_id, "report": report}
+        return {
+            "account_id": account_id,
+            "balance": account_data["balances"],
+            "report": report,
+        }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
-
