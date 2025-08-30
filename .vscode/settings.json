@@ -1,0 +1,106 @@
+{
+    // General Editor Settings
+    // These settings apply to all files unless overridden by language-specific settings.
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        88,
+        120
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "workbench.editor.labelFormat": "short",
+
+    // File & Search Exclusion
+    // Hides clutter from the file explorer and speeds up searching.
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "**/node_modules/": true,
+        "**/.venv": true,
+        "**/venv": true,
+        "**/build": true,
+        "**/dist": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/venv": true,
+        "**/.venv": true,
+        "**/dist": true,
+        "**/build": true
+    },
+
+    // Python Specific Settings
+    // Configures formatting with Black, linting with flake8, and testing with pytest.
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "backend/tests"
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+
+    // JavaScript / TypeScript / Web Specific Settings
+    // Sets Prettier as the default formatter for all web-related files.
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    // Solidity Specific Settings
+    // Requires the 'solidity' extension by Nomic Foundation.
+    // Also formats using Prettier (requires `prettier-plugin-solidity` in your project).
+    "[solidity]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
