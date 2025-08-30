@@ -3,8 +3,6 @@
 # Ignora arquivos de ambiente que contêm senhas, chaves de API, etc.
 # =========================================================================
 .env
-.env.*
-! .env.example
 
 # Arquivos de log
 *.log
