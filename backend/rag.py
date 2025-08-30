@@ -1,7 +1,6 @@
 import os
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from openai import OpenAI
-from stellar_connector import StellarDataRetriever
 
 
 class ReportGenerator:
@@ -15,7 +14,7 @@ class ReportGenerator:
         self, account_data: Dict[str, Any], transactions: List[Dict[str, Any]]
     ) -> str:
         """Gera um relatório em linguagem natural baseado nos dados."""
-        
+
         prompt = f"""
         Com base nos seguintes dados de uma conta Stellar, gere um relatório em linguagem natural:
 
@@ -57,23 +56,11 @@ class ReportGenerator:
 class RAGSystem:
     def __init__(
         self,
-        horizon_url: str = "https://horizon.stellar.org",
     ):
-        self.retriever = StellarDataRetriever(horizon_url)
         self.generator = ReportGenerator()
 
-    def generate_account_report(self, account_id: str) -> str:
-        """Orquestra a busca de dados e geração do relatório."""
-        account_data = self.retriever.get_account_data(account_id)
-        transactions = self.retriever.get_recent_transactions(account_id)
+    def generate_account_report(
+        self, account_data: Dict[str, Any], transactions: List[Dict[str, Any]]
+    ) -> str:
         report = self.generator.generate_report(account_data, transactions)
         return report
-
-
-# Exemplo de uso
-if __name__ == "__main__":
-    # Substitua pela sua chave API do OpenAI
-    rag = RAGSystem()
-    account_id = "GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR"  # Exemplo
-    report = rag.generate_account_report(account_id)
-    print(report)
