@@ -1,0 +1,79 @@
+import os
+from typing import Dict, List, Any, Optional
+from openai import OpenAI
+from stellar_connector import StellarDataRetriever
+
+
+class ReportGenerator:
+    def __init__(self):
+        self.api_key = os.getenv("OPENAI_API_KEY")
+        if not self.api_key:
+            raise ValueError("Chave API do OpenAI não fornecida.")
+        self.client = OpenAI(api_key=self.api_key)
+
+    def generate_report(
+        self, account_data: Dict[str, Any], transactions: List[Dict[str, Any]]
+    ) -> str:
+        """Gera um relatório em linguagem natural baseado nos dados."""
+        
+        prompt = f"""
+        Com base nos seguintes dados de uma conta Stellar, gere um relatório em linguagem natural:
+
+        Dados da Conta:
+        - ID da Conta: {account_data['account_id']}
+        - Saldos: {account_data['balances']}
+        - Sequência: {account_data['sequence']}
+        - Flags: {account_data['flags']}
+        - Signatários: {account_data['signers']}
+
+        Transações Recentes ({len(transactions)}):
+        {transactions}
+
+        Relatório deve incluir:
+        - Resumo do saldo e ativos.
+        - Análise das transações recentes.
+        - Observações sobre segurança e atividade.
+        """
+
+        try:
+            response = self.client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "Você é um analista financeiro especializado em blockchain Stellar.",
+                    },
+                    {"role": "user", "content": prompt},
+                ],
+                max_tokens=1000,
+                temperature=0.7,
+            )
+            content = response.choices[0].message.content
+            return content.strip() if content else "Erro: Conteúdo vazio da resposta."
+        except Exception as e:
+            raise ValueError(f"Erro ao gerar relatório: {str(e)}")
+
+
+class RAGSystem:
+    def __init__(
+        self,
+        horizon_url: str = "https://horizon.stellar.org",
+    ):
+        self.retriever = StellarDataRetriever(horizon_url)
+        self.generator = ReportGenerator()
+
+    def generate_account_report(self, account_id: str) -> str:
+        """Orquestra a busca de dados e geração do relatório."""
+        account_data = self.retriever.get_account_data(account_id)
+        transactions = self.retriever.get_recent_transactions(account_id)
+        report = self.generator.generate_report(account_data, transactions)
+        return report
+
+
+# Exemplo de uso
+if __name__ == "__main__":
+    # Substitua pela sua chave API do OpenAI
+    rag = RAGSystem()
+    account_id = "GAIH3ULLFQ4DGSECF2AR555KZ4KNDGEKN4AFI4SU2M7B43MGK3QJZNSR"  # Exemplo
+    report = rag.generate_account_report(account_id)
+    print(report)
