@@ -2,11 +2,29 @@ from fastapi import FastAPI, HTTPException
 from typing import Optional
 from rag import RAGSystem
 from stellar_connector import StellarDataRetriever
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+# CORS para permitir chamadas do frontend (Vite)
+origins = [
+    "http://localhost:5173",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
+)
+
 rag_system = RAGSystem()
 stellar = StellarDataRetriever()
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 
 @app.get("/generate-report")
