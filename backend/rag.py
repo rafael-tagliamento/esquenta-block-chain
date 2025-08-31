@@ -1,10 +1,11 @@
-import os
 from typing import Dict, List, Any
 from groq import Groq
+from dotenv import load_dotenv
 
 
 class ReportGenerator:
     def __init__(self):
+        load_dotenv()
         self.client = Groq()
 
     def generate_report(
