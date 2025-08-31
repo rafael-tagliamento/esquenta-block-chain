@@ -1,18 +1,35 @@
-
-.risco-de-lapis {
+.btn {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  padding: 5px 5px;
   position: relative;
+  text-align: center;
 }
 
-.risco-de-lapis::after {
-  content: '';
+.btn:hover .button-stroke:nth-child(2) {
+  stroke-dashoffset: 0;
+}
+
+.button-stroke {
+  display: block;
+  width: calc(100% - 10px);
+  height: 20px;
+  stroke: #7c3aed;
   position: absolute;
-  bottom: -4px; /* Ajuste a distância do sublinhado */
-  left: 0;
-  width: 100%;
-  height: 4px; /* Ajuste a espessura do sublinhado */
-  background-image: linear-gradient(to right, #000000 0%, #000000 20%, transparent 20%, transparent 40%, #000000 40%, #000000 60%, transparent 60%, transparent 80%, #000000 80%, #000000 100%);
-  background-size: 100% 1px;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  opacity: 0.8; /* Adicione um pouco de transparência para parecer mais com grafite */
+  left: 5px;
+  bottom: -8px;
+  stroke-width: 4;
+}
+
+.button-stroke:nth-child(2) {
+  stroke-dasharray: 650px;
+  stroke-dashoffset: 650px;
+  stroke: #4B0082;
+  stroke-width: 5;
+  transition: stroke-dashoffset 800ms ease-out;
+}
+
+body {
+  caret-color: transparent; 
 }

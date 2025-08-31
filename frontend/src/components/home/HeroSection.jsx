@@ -1,4 +1,4 @@
-import ArrowRightIcon from './icons/ArrowRightIcon';
+import ArrowRightIcon from '../icons/ArrowRightIcon';
 
 const HeroSection = ({ textTranslateY, textOpacity }) => {
   return (
