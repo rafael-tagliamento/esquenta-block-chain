@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ArrowRightIcon from '../icons/ArrowRightIcon';
-import MarkdownRenderer from './MarkdownRenderer';
+import MarkdownRenderer from '../MarkdownRenderer';
 
 const HeroSection = ({ textTranslateY, textOpacity }) => {
 	const [accountId, setAccountId] = useState('');
