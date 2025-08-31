@@ -28,15 +28,19 @@ def health():
 
 
 @app.get("/generate-report")
-def generate_stellar_report(account_id: str):
+def generate_stellar_report(account_id: str, network: str = "testnet"):
     """Gera um relatório RAG para uma conta Stellar."""
     try:
-        account_data = stellar.get_account_data(account_id)
-        transactions = stellar.get_recent_transactions(account_id, 10)
+        # Criar instância do StellarDataRetriever com a rede especificada
+        stellar_instance = StellarDataRetriever(network=network)
+        
+        account_data = stellar_instance.get_account_data(account_id)
+        transactions = stellar_instance.get_recent_transactions(account_id, 10)
 
         report = rag_system.generate_account_report(account_data, transactions)
         return {
             "account_id": account_id,
+            "network": network,
             "balance": account_data["balances"],
             "report": report,
         }
