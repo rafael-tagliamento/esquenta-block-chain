@@ -64,6 +64,43 @@ npm run dev
 
 O frontend estará disponível em: `http://localhost:5173`
 
+## Como Usar o Sistema
+
+1. **Acesse a aplicação** em `http://localhost:5173`
+2. **Selecione a rede Stellar**:
+   - **Testnet**: Para contas de teste (recomendado para primeiros testes)
+   - **Mainnet**: Para contas reais com XLM verdadeiro
+3. **Cole a chave pública** da conta que deseja analisar
+4. **Clique em "Analisar"** e aguarde o relatório ser gerado
+
+### 🧪 Testnet - Rede de Desenvolvimento
+
+#### Como obter uma conta de teste:
+
+**Método 1: Script automático**
+```bash
+# Execute o script para criar e financiar uma conta
+python criar_conta_testnet.py
+```
+
+**Método 2: Manual**
+1. Acesse o [Stellar Laboratory](https://laboratory.stellar.org/)
+2. Vá em "Account Creator" 
+3. Clique em "Generate keypair"
+4. Copie a **chave pública** (começa com `G`)
+5. Financie a conta no [Friendbot](https://friendbot.stellar.org/)
+
+
+### 🌟 Mainnet - Rede Principal
+
+#### Explorando contas reais:
+
+**Visualizar transações**: Acesse o [Stellar Expert](https://stellar.expert/explorer/public) para explorar contas e transações reais da blockchain Stellar.
+
+#### Exemplo de conta Mainnet - SDF (Stellar Development Foundation):
+```
+GCKA6K5PCQ6PNF5RQBF7PQDJWRHO6UOGFMRLK3DYHDOI244V47XKQ4GP
+```
 
 ## Autores
 
