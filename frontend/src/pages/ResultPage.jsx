@@ -1,8 +1,9 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import MarkdownRenderer from "../components/MarkdownRenderer";
 
 const ResultPage = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
   const reportData = state?.reportData;
   const saldo = reportData?.balance || [];
   const chave = reportData?.account_id || [];
@@ -42,6 +43,15 @@ const ResultPage = () => {
             </div>
           </div>
         )}
+
+        <div className="mt-8">
+          <button
+            onClick={() => navigate('/')}
+            className="bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200 inline-flex items-center gap-2"
+          >
+            ← Nova Pesquisa
+          </button>
+        </div>
       </div>
     </div>
   );
