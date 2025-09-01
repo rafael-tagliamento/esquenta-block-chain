@@ -1,5 +1,4 @@
 from fastapi import FastAPI, HTTPException
-from typing import Optional
 from rag import RAGSystem
 from stellar_connector import StellarDataRetriever
 from fastapi.middleware.cors import CORSMiddleware
