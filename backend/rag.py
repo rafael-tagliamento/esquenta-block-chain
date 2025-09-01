@@ -42,7 +42,7 @@ class ReportGenerator:
                     },
                     {"role": "user", "content": prompt},
                 ],
-                max_tokens=1000,
+                max_tokens=2048,
                 temperature=0.7,
             )
             content = response.choices[0].message.content
